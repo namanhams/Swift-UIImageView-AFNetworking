@@ -104,6 +104,7 @@ extension UIImageView {
                         else {
                             self.image = image!
                         }
+                        UIImageView.sharedImageCache().cacheImage(image!, forRequest: request)
                     }
                     else {
                         if failure != nil {
