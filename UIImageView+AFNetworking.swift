@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol AFImageCacheProtocol:class{
+@objc public protocol AFImageCacheProtocol:class{
     func cachedImageForRequest(request:NSURLRequest) -> UIImage?
     func cacheImage(image:UIImage, forRequest request:NSURLRequest);
 }
@@ -19,11 +19,11 @@ extension UIImageView {
         static var URLRequestImage = "UrlRequestImage"
     }
     
-    class func setSharedImageCache(cache:AFImageCacheProtocol?) {
-        objc_setAssociatedObject(self, &AssociatedKeys.SharedImageCache, cache, UInt(OBJC_ASSOCIATION_COPY))
+    public class func setSharedImageCache(cache:AFImageCacheProtocol?) {
+        objc_setAssociatedObject(self, &AssociatedKeys.SharedImageCache, cache, UInt(OBJC_ASSOCIATION_RETAIN))
     }
     
-    class func sharedImageCache() -> AFImageCacheProtocol {
+    public class func sharedImageCache() -> AFImageCacheProtocol {
         struct Static {
             static var token : dispatch_once_t = 0
             static var defaultImageCache:AFImageCache?
@@ -35,10 +35,10 @@ extension UIImageView {
                 Static.defaultImageCache!.removeAllObjects()
             }
         })
-        return objc_getAssociatedObject(self, &AssociatedKeys.SharedImageCache) as? AFImageCache ?? Static.defaultImageCache!
+        return objc_getAssociatedObject(self, &AssociatedKeys.SharedImageCache) as? AFImageCacheProtocol ?? Static.defaultImageCache!
     }
     
-    class func af_sharedImageRequestOperationQueue() -> NSOperationQueue {
+    private class func af_sharedImageRequestOperationQueue() -> NSOperationQueue {
         struct Static {
             static var token:dispatch_once_t = 0
             static var queue:NSOperationQueue?
@@ -63,13 +63,13 @@ extension UIImageView {
         }
     }
     
-    func setImageWithUrl(url:NSURL, placeHolderImage:UIImage? = nil) {
+    public func setImageWithUrl(url:NSURL, placeHolderImage:UIImage? = nil) {
         let request:NSMutableURLRequest = NSMutableURLRequest(URL: url)
         request.addValue("image/*", forHTTPHeaderField: "Accept")
         self.setImageWithUrlRequest(request, placeHolderImage: placeHolderImage, success: nil, failure: nil)
     }
     
-    func setImageWithUrlRequest(request:NSURLRequest, placeHolderImage:UIImage? = nil,
+    public func setImageWithUrlRequest(request:NSURLRequest, placeHolderImage:UIImage? = nil,
         success:((request:NSURLRequest?, response:NSURLResponse?, image:UIImage) -> Void)?,
         failure:((request:NSURLRequest?, response:NSURLResponse?, error:NSError) -> Void)?)
     {
