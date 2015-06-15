@@ -70,14 +70,14 @@ extension UIImageView {
     }
     
     public func setImageWithUrlRequest(request:NSURLRequest, placeHolderImage:UIImage? = nil,
-        success:((request:NSURLRequest?, response:NSURLResponse?, image:UIImage) -> Void)?,
+		success:((request:NSURLRequest?, response:NSURLResponse?, image:UIImage, fromCache:Bool) -> Void)?,
         failure:((request:NSURLRequest?, response:NSURLResponse?, error:NSError) -> Void)?)
     {
         self.cancelImageRequestOperation()
         
         if let cachedImage = UIImageView.sharedImageCache().cachedImageForRequest(request) {
             if success != nil {
-                success!(request: nil, response:nil, image: cachedImage)
+				success!(request: nil, response:nil, image: cachedImage, fromCache:true)
             }
             else {
                 self.image = cachedImage
@@ -99,7 +99,7 @@ extension UIImageView {
                     var image:UIImage? = (data != nil ? UIImage(data: data!) : nil)
                     if image != nil {
                         if success != nil {
-                            success!(request: request, response: response, image: image!)
+							success!(request: request, response: response, image: image!, fromCache:false)
                         }
                         else {
                             self.image = image!
