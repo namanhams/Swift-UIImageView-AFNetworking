@@ -14,3 +14,6 @@ public func setImageWithUrlRequest(request:NSURLRequest, placeHolderImage:UIImag
         success:((request:NSURLRequest?, response:NSURLResponse?, image:UIImage) -> Void)?,
         failure:((request:NSURLRequest?, response:NSURLResponse?, error:NSError) -> Void)?)
 `````
+
+<h3><b>Swift 2.3 support</h3></b>
+Use branch swift-2.3
