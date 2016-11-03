@@ -128,7 +128,7 @@ extension UIImageView {
 }
 
 func AFImageCacheKeyFromURLRequest(request:NSURLRequest) -> String {
-    return request.URL!.absoluteString
+    return request.URL!.absoluteString!
 }
 
 class AFImageCache: NSCache, AFImageCacheProtocol {
