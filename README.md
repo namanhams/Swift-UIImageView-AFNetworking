@@ -4,9 +4,9 @@ Swift version of UIImageView+AFNetworking.
 This is the Swift version of UIImageView+AFNetworking from the famous AFNetworking library. 
 Just drop the file into your project and you can start using it !
 
-Note: this file doesn't use anything from AFNetworking or Alamofire. So there's no need to use those libraries in your project.
+<h2><b>Note</b></h2>: this file doesn't use anything from AFNetworking or Alamofire. There's no need to use those libraries in your project. I name it this way because it's inspired by the Objc version from AFNetworking
 
-<h2><b>Usage</h2></b>
+<h2><b>Usage</b></h2>: 
 
 ```objc
 public func setImageWithUrl(url:NSURL, placeHolderImage:UIImage? = nil);
