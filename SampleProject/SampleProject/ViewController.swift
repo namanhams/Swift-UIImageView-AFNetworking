@@ -15,11 +15,11 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         let imageView = UIImageView(frame: view.bounds)
-        imageView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(imageView)
         
         let url = NSURL(string: "https://s-media-cache-ak0.pinimg.com/564x/a2/b8/e4/a2b8e40d4175b0a7c3e903e913d54cfc.jpg")
-        imageView.setImageWithUrl(url!)
+        imageView.setImageWithUrl(url! as URL)
     }
 }
 
